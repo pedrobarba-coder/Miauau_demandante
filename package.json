@@ -1,0 +1,19 @@
+{
+  "name": "peludinho-agendamento",
+  "version": "0.2.0",
+  "description": "Sprint 2 — agendamento online do Banho e Tosa Pet Peludinho (projeto de extensão)",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22.13" },
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js",
+    "seed": "node server/seed.js",
+    "test": "node --test \"test/*.test.js\""
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.0.0"
+  }
+}
