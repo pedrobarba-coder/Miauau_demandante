@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel do salão | Pet Peludinho</title>
+<meta name="description" content="Painel interno do salão.">
+<link rel="icon" href="images/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/agendamento.css">
+<meta name="robots" content="noindex">
+</head>
+<body>
+
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <img src="images/logo.png" alt="Logo Banho e Tosa Pet Peludinho">
+      <span class="brand-name">Pet Peludinho<span>Banho &amp; Tosa</span></span>
+    </a>
+
+    <button class="nav-toggle" aria-label="Abrir menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="main-nav">
+      <a href="index.html">Início</a>
+      <a href="sobre.html">Contato</a>
+      <a href="agendar.html" class="btn btn-primary">Agendar online</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="page-head">
+    <div class="container">
+      <span class="section-tag">Área do salão</span>
+      <h1>Agenda do dia</h1>
+    </div>
+  </section>
+
+  <section class="alt-bg">
+    <div class="container">
+      <form id="admin-login" class="booking-card admin-login">
+        <div class="field">
+          <label for="admin-token">Senha do painel</label>
+          <input id="admin-token" type="password" autocomplete="current-password" required>
+        </div>
+        <button class="btn btn-primary" type="submit">Entrar</button>
+        <p class="erro" id="admin-erro" role="alert"></p>
+      </form>
+
+      <div id="admin-painel" hidden>
+        <div class="admin-barra">
+          <button class="btn btn-secondary" type="button" id="dia-ant">‹ Dia anterior</button>
+          <input type="date" id="admin-data" aria-label="Data">
+          <button class="btn btn-secondary" type="button" id="dia-prox">Próximo dia ›</button>
+          <button class="btn btn-secondary" type="button" id="admin-sair">Sair</button>
+        </div>
+        <p class="alerta" id="admin-aviso" role="alert" hidden></p>
+        <div id="admin-lista" class="admin-lista" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <img src="images/logo.png" alt="Logo Pet Peludinho">
+          <span>Pet Peludinho</span>
+        </div>
+        <p>Banho e tosa feitos com carinho, na Penha, São Paulo.</p>
+      </div>
+
+      <div>
+        <h4>Navegação</h4>
+        <ul>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="sobre.html">Contato</a></li>
+          <li><a href="index.html#servicos">Serviços</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Contato</h4>
+        <ul>
+          <li><a href="https://wa.me/5511994375673" target="_blank" rel="noopener">(11) 99437-5673</a></li>
+          <li><a href="https://www.instagram.com/banhoetosapetpeludinho/" target="_blank" rel="noopener">@banhoetosapetpeludinho</a></li>
+          <li>Rua Francisco Coimbra, 610 — Penha, São Paulo</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> Banho e Tosa Pet Peludinho</span>
+      <span>Feito com carinho para o Peludinho 🐾</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/script.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agendar banho e tosa | Pet Peludinho</title>
+<meta name="description" content="Agende online o banho e tosa do seu pet no Pet Peludinho, na Penha, São Paulo.">
+<link rel="icon" href="images/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/agendamento.css">
+</head>
+<body>
+
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <img src="images/logo.png" alt="Logo Banho e Tosa Pet Peludinho">
+      <span class="brand-name">Pet Peludinho<span>Banho &amp; Tosa</span></span>
+    </a>
+
+    <button class="nav-toggle" aria-label="Abrir menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="main-nav">
+      <a href="index.html">Início</a>
+      <a href="sobre.html">Contato</a>
+      <a href="agendar.html" class="btn btn-primary">Agendar online</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="page-head">
+    <div class="container">
+      <span class="section-tag">Agendamento online</span>
+      <h1>Agende o banho e tosa do seu pet</h1>
+      <p class="lead">Escolha os serviços, o dia e o horário. Seu horário fica reservado na hora e você recebe um código de confirmação.</p>
+    </div>
+  </section>
+
+  <section class="booking alt-bg">
+    <div class="container booking-layout">
+
+      <form id="form-agendamento" class="booking-card" novalidate autocomplete="on">
+        <ol class="stepper" aria-label="Etapas do agendamento">
+          <li class="is-current" data-step-ind="1"><span>1</span> Seu pet</li>
+          <li data-step-ind="2"><span>2</span> Data e horário</li>
+          <li data-step-ind="3"><span>3</span> Seus dados</li>
+        </ol>
+
+        <div class="alerta" id="alerta" role="alert" hidden></div>
+
+        <!-- ETAPA 1 -->
+        <fieldset class="step is-active" data-step="1">
+          <legend class="sr-only">Dados do pet e serviços</legend>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="pet-nome">Nome do pet *</label>
+              <input id="pet-nome" name="pet.nome" type="text" maxlength="60" required autocomplete="off">
+              <small class="erro" data-for="pet.nome"></small>
+            </div>
+            <div class="field">
+              <label for="pet-raca">Raça <span class="opcional">(opcional)</span></label>
+              <input id="pet-raca" name="pet.raca" type="text" maxlength="60" autocomplete="off">
+              <small class="erro" data-for="pet.raca"></small>
+            </div>
+          </div>
+
+          <div class="field">
+            <span class="label">Espécie *</span>
+            <div class="chips">
+              <label class="chip"><input type="radio" name="pet.especie" value="cao" checked><span>🐶 Cão</span></label>
+              <label class="chip"><input type="radio" name="pet.especie" value="gato"><span>🐱 Gato</span></label>
+            </div>
+          </div>
+
+          <div class="field">
+            <span class="label">Porte *</span>
+            <div class="porte-grid">
+              <label class="chip chip-block"><input type="radio" name="pet.porte" value="pequeno"><span><strong>Pequeno</strong><em>até 10 kg</em></span></label>
+              <label class="chip chip-block"><input type="radio" name="pet.porte" value="medio"><span><strong>Médio</strong><em>10 a 25 kg</em></span></label>
+              <label class="chip chip-block"><input type="radio" name="pet.porte" value="grande"><span><strong>Grande</strong><em>acima de 25 kg</em></span></label>
+            </div>
+            <small class="erro" data-for="pet.porte"></small>
+          </div>
+
+          <div class="field">
+            <span class="label">Serviços * <span class="opcional">(pode escolher mais de um)</span></span>
+            <div id="lista-servicos" class="servicos-lista" aria-live="polite">
+              <p class="carregando">Carregando serviços…</p>
+            </div>
+            <small class="erro" data-for="servicos"></small>
+          </div>
+
+          <div class="step-actions">
+            <span></span>
+            <button type="button" class="btn btn-primary" data-next>Escolher data e horário →</button>
+          </div>
+        </fieldset>
+
+        <!-- ETAPA 2 -->
+        <fieldset class="step" data-step="2">
+          <legend class="sr-only">Data e horário</legend>
+
+          <p class="duracao-info" id="duracao-info"></p>
+
+          <div class="calendario" id="calendario">
+            <div class="cal-head">
+              <button type="button" class="cal-nav" id="cal-prev" aria-label="Mês anterior">‹</button>
+              <strong id="cal-titulo" aria-live="polite"></strong>
+              <button type="button" class="cal-nav" id="cal-next" aria-label="Próximo mês">›</button>
+            </div>
+            <div class="cal-semana" aria-hidden="true">
+              <span>Dom</span><span>Seg</span><span>Ter</span><span>Qua</span><span>Qui</span><span>Sex</span><span>Sáb</span>
+            </div>
+            <div class="cal-grid" id="cal-grid" role="grid"></div>
+            <p class="cal-legenda"><span class="dot dot-livre"></span> com horários livres <span class="dot dot-cheio"></span> sem horários / fechado</p>
+          </div>
+
+          <div class="horarios" id="horarios-bloco" hidden>
+            <h3 id="horarios-titulo">Horários disponíveis</h3>
+            <div id="horarios" class="horarios-grid" role="radiogroup" aria-label="Horários disponíveis"></div>
+            <p class="carregando" id="horarios-vazio" hidden>Nenhum horário livre neste dia. Escolha outro dia.</p>
+          </div>
+          <small class="erro" data-for="data"></small>
+          <small class="erro" data-for="hora"></small>
+
+          <div class="step-actions">
+            <button type="button" class="btn btn-secondary" data-prev>← Voltar</button>
+            <button type="button" class="btn btn-primary" data-next>Continuar →</button>
+          </div>
+        </fieldset>
+
+        <!-- ETAPA 3 -->
+        <fieldset class="step" data-step="3">
+          <legend class="sr-only">Dados do tutor</legend>
+
+          <div class="resumo" id="resumo" aria-live="polite"></div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="tutor-nome">Seu nome *</label>
+              <input id="tutor-nome" name="tutor.nome" type="text" maxlength="80" required autocomplete="name">
+              <small class="erro" data-for="tutor.nome"></small>
+            </div>
+            <div class="field">
+              <label for="tutor-telefone">WhatsApp / telefone *</label>
+              <input id="tutor-telefone" name="tutor.telefone" type="tel" inputmode="tel" placeholder="(11) 99999-9999" maxlength="20" required autocomplete="tel">
+              <small class="erro" data-for="tutor.telefone"></small>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="tutor-email">E-mail <span class="opcional">(opcional)</span></label>
+            <input id="tutor-email" name="tutor.email" type="email" maxlength="120" autocomplete="email">
+            <small class="erro" data-for="tutor.email"></small>
+          </div>
+
+          <div class="field">
+            <label for="obs">Observações <span class="opcional">(opcional)</span></label>
+            <textarea id="obs" name="observacoes" rows="3" maxlength="300" placeholder="Ex.: pet nervoso com secador, alergia a algum produto…"></textarea>
+            <small class="erro" data-for="observacoes"></small>
+          </div>
+
+          <div class="step-actions">
+            <button type="button" class="btn btn-secondary" data-prev>← Voltar</button>
+            <button type="submit" class="btn btn-primary" id="btn-enviar">Confirmar agendamento</button>
+          </div>
+          <p class="nota">Usamos seus dados só para organizar o atendimento do seu pet.</p>
+        </fieldset>
+      </form>
+
+      <aside class="booking-side">
+        <div class="side-card">
+          <h3>Como funciona</h3>
+          <ol>
+            <li>Conte sobre seu pet e escolha os serviços.</li>
+            <li>Escolha um dia e um horário livre.</li>
+            <li>Confirme — o horário é reservado na hora.</li>
+          </ol>
+        </div>
+        <div class="side-card">
+          <h3>Horário de atendimento</h3>
+          <p>Segunda a sexta: 8h às 18h<br>Sábado: 8h às 14h<br>Domingo: fechado</p>
+          <p class="mini">O tempo do atendimento depende dos serviços e do porte do pet. Agende com pelo menos 2 horas de antecedência.</p>
+        </div>
+      </aside>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <img src="images/logo.png" alt="Logo Pet Peludinho">
+          <span>Pet Peludinho</span>
+        </div>
+        <p>Banho e tosa feitos com carinho, na Penha, São Paulo.</p>
+      </div>
+
+      <div>
+        <h4>Navegação</h4>
+        <ul>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="sobre.html">Contato</a></li>
+          <li><a href="index.html#servicos">Serviços</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Contato</h4>
+        <ul>
+          <li><a href="https://wa.me/5511994375673" target="_blank" rel="noopener">(11) 99437-5673</a></li>
+          <li><a href="https://www.instagram.com/banhoetosapetpeludinho/" target="_blank" rel="noopener">@banhoetosapetpeludinho</a></li>
+          <li>Rua Francisco Coimbra, 610 — Penha, São Paulo</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> Banho e Tosa Pet Peludinho</span>
+      <span>Feito com carinho para o Peludinho 🐾</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/script.js"></script>
+<script src="js/agendar.js"></script>
+</body>
+</html>

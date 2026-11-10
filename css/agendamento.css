@@ -1,0 +1,197 @@
+/* =========================================================
+   Sprint 2 — estilos do agendamento, confirmação e painel.
+   Usa as variáveis de cor/tipografia de style.css.
+   ========================================================= */
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+
+.page-head { padding: 56px 0 32px; }
+.page-head h1 { font-size: clamp(2rem, 4.4vw, 2.8rem); }
+.page-head .lead { max-width: 60ch; color: var(--ink-soft); margin: 0; }
+.booking { padding-top: 48px; }
+
+.booking-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 32px;
+  align-items: start;
+}
+
+.booking-card, .side-card, .conf-card {
+  background: var(--bg-alt);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  box-shadow: 0 18px 40px -28px rgba(92, 58, 33, 0.35);
+}
+.side-card { padding: 24px; border-radius: var(--radius-md); margin-bottom: 20px; }
+.side-card h3 { font-size: 1.15rem; }
+.side-card ol { margin: 0; padding-left: 20px; color: var(--ink-soft); }
+.side-card p { margin: 0 0 8px; }
+.side-card .mini { font-size: 0.88rem; color: var(--ink-soft); }
+
+/* ---------- Etapas ---------- */
+.stepper {
+  list-style: none; display: flex; gap: 8px; padding: 0; margin: 0 0 28px;
+  font-family: var(--font-display); font-weight: 600; color: var(--ink-soft); font-size: 0.95rem;
+}
+.stepper li { display: flex; align-items: center; gap: 8px; flex: 1; }
+.stepper li span {
+  display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 50%;
+  background: var(--brown-soft); color: var(--brown-deep); flex: none;
+}
+.stepper li.is-current { color: var(--brown-deep); }
+.stepper li.is-current span, .stepper li.is-done span { background: var(--coral); color: #fff; }
+
+.step { display: none; border: 0; padding: 0; margin: 0; min-width: 0; }
+.step.is-active { display: block; }
+
+.step-actions { display: flex; justify-content: space-between; gap: 12px; margin-top: 28px; flex-wrap: wrap; }
+.nota { font-size: 0.85rem; color: var(--ink-soft); margin: 16px 0 0; }
+
+/* ---------- Campos ---------- */
+.field { margin-bottom: 20px; }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.field label, .field .label { display: block; font-weight: 700; margin-bottom: 6px; color: var(--brown-deep); }
+.opcional { font-weight: 400; color: var(--ink-soft); font-size: 0.88rem; }
+
+.field input[type="text"], .field input[type="tel"], .field input[type="email"],
+.field input[type="password"], .field textarea, #admin-data {
+  width: 100%; font: inherit; color: var(--ink);
+  padding: 12px 14px; border: 2px solid var(--line); border-radius: var(--radius-sm);
+  background: #fff; transition: border-color 0.15s;
+}
+.field input:focus, .field textarea:focus, #admin-data:focus { outline: none; border-color: var(--blue-suds-deep); }
+.field .invalid { border-color: var(--coral); }
+
+.erro { display: block; color: var(--coral-deep); font-weight: 600; font-size: 0.88rem; min-height: 0; margin-top: 4px; }
+.erro:empty { display: none; }
+
+.alerta {
+  background: #FDECE8; border: 1px solid var(--coral); color: var(--coral-deep);
+  padding: 12px 16px; border-radius: var(--radius-sm); margin-bottom: 20px; font-weight: 600;
+}
+
+/* chips (espécie / porte) */
+.chips, .porte-grid { display: flex; gap: 10px; flex-wrap: wrap; }
+.porte-grid { display: grid; grid-template-columns: repeat(3, 1fr); }
+.chip input, .servico-op input { position: absolute; opacity: 0; pointer-events: none; }
+.chip span {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+  padding: 12px 18px; border: 2px solid var(--line); border-radius: var(--radius-md);
+  cursor: pointer; background: #fff; text-align: center; transition: all 0.15s;
+}
+.chip em { font-style: normal; font-size: 0.82rem; color: var(--ink-soft); }
+.chip input:checked + span { border-color: var(--coral); background: #FDF1EE; }
+.chip input:focus-visible + span, .servico-op input:focus-visible + span { outline: 3px solid var(--blue-suds-deep); outline-offset: 2px; }
+
+/* serviços */
+.servicos-lista { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 10px; }
+.servico-op { position: relative; display: block; cursor: pointer; }
+.servico-op span {
+  display: flex; flex-direction: column; padding: 12px 14px 12px 44px;
+  border: 2px solid var(--line); border-radius: var(--radius-md); background: #fff; height: 100%;
+  transition: all 0.15s; position: relative;
+}
+.servico-op span::before {
+  content: ""; position: absolute; left: 14px; top: 16px; width: 20px; height: 20px;
+  border: 2px solid var(--line); border-radius: 6px; background: #fff;
+}
+.servico-op em { font-style: normal; font-size: 0.85rem; color: var(--ink-soft); }
+.servico-op input:checked + span { border-color: var(--coral); background: #FDF1EE; }
+.servico-op input:checked + span::before { background: var(--coral); border-color: var(--coral); box-shadow: inset 0 0 0 3px #fff; }
+
+.carregando { color: var(--ink-soft); margin: 0; }
+
+/* ---------- Calendário ---------- */
+.duracao-info { background: var(--brown-soft); padding: 10px 14px; border-radius: var(--radius-sm); margin: 0 0 20px; font-weight: 600; color: var(--brown-deep); }
+
+.calendario { max-width: 420px; }
+.cal-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.cal-head strong { font-family: var(--font-display); font-size: 1.2rem; color: var(--brown-deep); }
+.cal-head strong::first-letter, .horarios h3::first-letter { text-transform: uppercase; }
+.cal-nav {
+  width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--line); background: #fff;
+  font-size: 1.4rem; line-height: 1; cursor: pointer; color: var(--brown-deep);
+}
+.cal-nav:disabled { opacity: 0.35; cursor: not-allowed; }
+.cal-semana, .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; text-align: center; }
+.cal-semana { font-size: 0.8rem; font-weight: 700; color: var(--ink-soft); margin-bottom: 4px; }
+.cal-dia, .cal-vazio { aspect-ratio: 1; }
+.cal-dia {
+  border: 2px solid transparent; border-radius: 12px; background: transparent; font: inherit;
+  font-weight: 600; color: var(--ink-soft); cursor: not-allowed;
+}
+.cal-dia:disabled { opacity: 0.45; text-decoration: line-through; }
+.cal-dia.tem-vaga { background: #EAF6FA; color: var(--brown-deep); cursor: pointer; }
+.cal-dia.tem-vaga:hover { border-color: var(--blue-suds-deep); }
+.cal-dia.is-selected { background: var(--coral); color: #fff; border-color: var(--coral); }
+.cal-legenda { font-size: 0.82rem; color: var(--ink-soft); margin: 10px 0 0; }
+.dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin: 0 4px 0 8px; }
+.dot-livre { background: var(--blue-suds); }
+.dot-cheio { background: var(--line); }
+
+.horarios { margin-top: 24px; }
+.horarios h3 { font-size: 1.1rem; }
+.horarios-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); gap: 8px; }
+.hora {
+  padding: 10px 0; border: 2px solid var(--line); border-radius: 999px; background: #fff;
+  font: inherit; font-weight: 700; color: var(--brown-deep); cursor: pointer; transition: all 0.15s;
+}
+.hora:hover { border-color: var(--blue-suds-deep); }
+.hora.is-selected { background: var(--coral); border-color: var(--coral); color: #fff; }
+
+/* ---------- Resumo ---------- */
+.resumo { background: var(--brown-soft); border-radius: var(--radius-md); padding: 18px 20px; margin-bottom: 24px; }
+.resumo h3, .conf-card h3 { font-size: 1.1rem; }
+.resumo dl, .conf-dados { margin: 0; }
+.resumo dl > div, .conf-dados > div { display: flex; gap: 12px; padding: 4px 0; }
+.resumo dt, .conf-dados dt { font-weight: 700; min-width: 80px; color: var(--brown-deep); }
+.resumo dd, .conf-dados dd { margin: 0; }
+
+/* ---------- Confirmação ---------- */
+.conf-card { max-width: 640px; margin: 0 auto; }
+.conf-codigo {
+  text-align: center; background: var(--brown-soft); border-radius: var(--radius-md);
+  padding: 16px; margin-bottom: 24px;
+}
+.conf-codigo span { display: block; font-size: 0.9rem; color: var(--ink-soft); }
+.conf-codigo strong { font-family: var(--font-display); font-size: 2.2rem; letter-spacing: 0.18em; color: var(--brown-deep); }
+.conf-aviso { margin: 20px 0; color: var(--ink-soft); }
+.conf-acoes { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 8px; }
+
+/* ---------- Painel do salão ---------- */
+.admin-login { max-width: 420px; }
+.admin-barra { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 20px; }
+#admin-data { width: auto; }
+.btn-sm { padding: 8px 16px; font-size: 0.9rem; }
+.admin-lista { display: grid; gap: 12px; }
+.admin-item {
+  display: grid; grid-template-columns: 110px 1fr auto; gap: 8px 16px; align-items: center;
+  background: #fff; border: 1px solid var(--line); border-left: 6px solid var(--blue-suds-deep);
+  border-radius: var(--radius-md); padding: 16px;
+}
+.admin-hora { font-family: var(--font-display); font-weight: 700; font-size: 1.15rem; color: var(--brown-deep); }
+.admin-info { display: flex; flex-direction: column; gap: 2px; min-width: 0; overflow-wrap: anywhere; }
+.admin-info small { color: var(--ink-soft); }
+.admin-status { text-transform: capitalize; font-weight: 700; }
+.admin-acoes { grid-column: 1 / -1; display: flex; gap: 8px; flex-wrap: wrap; }
+.status-concluido { border-left-color: #4C9A6A; }
+.status-cancelado, .status-faltou { border-left-color: var(--coral); opacity: 0.8; }
+
+@media (max-width: 880px) {
+  .booking-layout { grid-template-columns: 1fr; }
+  .booking-side { order: -1; display: none; }
+}
+@media (max-width: 560px) {
+  .booking-card, .conf-card { padding: 22px 18px; }
+  .field-row { grid-template-columns: 1fr; gap: 0; }
+  .porte-grid { grid-template-columns: 1fr; }
+  .stepper { font-size: 0.8rem; }
+  .stepper li { flex-direction: column; text-align: center; gap: 4px; }
+  .admin-item { grid-template-columns: 1fr; }
+  .step-actions .btn { flex: 1; justify-content: center; white-space: nowrap; padding-left: 16px; padding-right: 16px; }
+}

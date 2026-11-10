@@ -72,3 +72,24 @@ git push -u origin main
 ```
 
 Depois é só ativar o GitHub Pages como no passo a passo acima.
+
+---
+
+## Sprint 2 — Agendamento online
+
+O site agora tem **agendamento online** (calendário, horários livres,
+cadastro de tutor/pet, confirmação com link de WhatsApp) e um painel para
+o salão. Isso exige um servidor (Node.js + SQLite), então a parte de
+agendamento **não roda no GitHub Pages**.
+
+```bash
+npm install
+npm run seed   # opcional: agendamentos de exemplo
+npm start      # http://localhost:3000   (painel: /admin.html, senha dev: dev-admin-token)
+npm test       # 24 testes
+```
+
+Documentação completa em [`docs/SPRINT2.md`](docs/SPRINT2.md).
+> Projeto de extensão acadêmica: regras de agenda são valores-modelo
+> (a confirmar com o cliente) e a homologação/deploy estão documentados,
+> mas não executados.
